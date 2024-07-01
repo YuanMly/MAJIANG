@@ -254,7 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mahjongCount: 100
-  prefab: {fileID: 3909672756282488740, guid: 414f4750e6e5fda4691f86b8c56816fb, type: 3}
+  singlePrefab: {fileID: 2156314524389579943, guid: 12a86a26d0de9e04cb7f22ec4279189a, type: 3}
+  doublePrefab: {fileID: 5814196925018004605, guid: 6301507238758784494a4afa34fdbd38, type: 3}
 --- !u!4 &831631045
 Transform:
   m_ObjectHideFlags: 0
@@ -316,29 +317,15 @@ GameObject:
   - component: {fileID: 936214701}
   - component: {fileID: 936214700}
   - component: {fileID: 936214699}
-  - component: {fileID: 936214697}
+  - component: {fileID: 936214702}
   m_Layer: 0
   m_HasEditorInfo: 1
-  m_Name: ConveyorBlt
+  m_Name: PlacementBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &936214697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936214696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04be3b7a697c70e48aea604446cb5dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slugCount: 10
-  velocity: 12
 --- !u!23 &936214699
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -400,12 +387,26 @@ Transform:
   m_GameObject: {fileID: 936214696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.04, y: 1, z: -99.92}
-  m_LocalScale: {x: 10, y: 1, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &936214702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936214696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88773bd41709dd4c95bbb39b9317dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slugCount: 8
+  model: {fileID: 100000, guid: 425bf8c9c108e254ba60dbbbdc6089eb, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

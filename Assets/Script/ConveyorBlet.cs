@@ -91,22 +91,22 @@ public class ConveyorBlet : MonoBehaviour
     }
 
     private void CheckToRemove() {
-        for (int i = 0; i < slugCount; i++) {
-            var firstCp = slugs[i].GetComponentInChildren<Mahjong>();
-            var secendCp = slugs[(i + 1) % slugCount].GetComponentInChildren<Mahjong>();
-            var thirdCp = slugs[(i + 2) % slugCount].GetComponentInChildren<Mahjong>();
-            if(firstCp == null || secendCp == null || thirdCp == null) continue;
-            if(!(firstCp.Value.type == secendCp.Value.type && 
-                 secendCp.Value.type == thirdCp.Value.type)) continue;
-            if(firstCp.Value.num == secendCp.Value.num && secendCp.Value.num == thirdCp.Value.num) {
-                Destroy(firstCp.gameObject);
-                Destroy(secendCp.gameObject);
-                Destroy(thirdCp.gameObject);
-            } else if((firstCp.Value.num + 1) == secendCp.Value.num && (secendCp.Value.num+1) == thirdCp.Value.num) {
-                Destroy(firstCp.gameObject);
-                Destroy(secendCp.gameObject);
-                Destroy(thirdCp.gameObject);
-            }
-        }
+        // for (int i = 0; i < slugCount; i++) {
+        //     var firstCp = slugs[i].GetComponentInChildren<Mahjong>();
+        //     var secendCp = slugs[(i + 1) % slugCount].GetComponentInChildren<Mahjong>();
+        //     var thirdCp = slugs[(i + 2) % slugCount].GetComponentInChildren<Mahjong>();
+        //     if(firstCp == null || secendCp == null || thirdCp == null) continue;
+        //     if(!(firstCp.Value.type == secendCp.Value.type && 
+        //          secendCp.Value.type == thirdCp.Value.type)) continue;
+        //     if(firstCp.Value.num == secendCp.Value.num && secendCp.Value.num == thirdCp.Value.num) {
+        //         Destroy(firstCp.gameObject);
+        //         Destroy(secendCp.gameObject);
+        //         Destroy(thirdCp.gameObject);
+        //     } else if((firstCp.Value.num + 1) == secendCp.Value.num && (secendCp.Value.num+1) == thirdCp.Value.num) {
+        //         Destroy(firstCp.gameObject);
+        //         Destroy(secendCp.gameObject);
+        //         Destroy(thirdCp.gameObject);
+        //     }
+        // }
     }
 }

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Mahjong : MonoBehaviour, IPointerClickHandler
-{
+public class Mahjong : MonoBehaviour{
     public enum Type {Bam, Crak, Dot, Dragon, Flower, Season, Wind}
 
     [System.Serializable]
@@ -29,26 +29,10 @@ public class Mahjong : MonoBehaviour, IPointerClickHandler
         public Type type;
         public int num;
     }
-    private Info _info;
-    public Info Value {
-        set {
-            _info = value;
-            GameObject obj = getPrefab(_info);
-            if(obj !=null) {
-                Instantiate(obj,transform);
-                var boxCollider = GetComponent<BoxCollider>();
-                boxCollider.size = obj.transform.GetComponent<Renderer>().bounds.size;
-            }
-            
-        }
-        get {
-            return _info;
-        }
-    }
 
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        ConveyorBlet.Instance.InsertToSlug(gameObject);
+    public GameObject MountShaderObject(Info value) {
+        GameObject obj = getPrefab(value);
+        if(obj !=null) return Instantiate(obj, transform);
+        throw new System.ArgumentOutOfRangeException();
     }
 }
