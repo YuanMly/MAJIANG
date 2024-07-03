@@ -5,8 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int mahjongCount;
-    public GameObject singlePrefab;
-    public GameObject doublePrefab;
+    public GameObject prefab;
     private static GameManager _instance;
     public static GameManager Instance {
         get {
@@ -25,31 +24,17 @@ public class GameManager : MonoBehaviour
     IEnumerator GenerateMahjongForLevel() {
         for(int i = 0; i < mahjongCount; i++){ 
             yield return new WaitForFixedUpdate();
-            bool bSingle = Random.Range(0,2) == 1;
-            if(bSingle) {
-                GameObject obj =  Instantiate(singlePrefab, new Vector3(Random.Range(-50,50), 5, Random.Range(-50,50)), Quaternion.identity);
-                var cp = obj.GetComponent<Single>();
-                var value = new Mahjong.Info
-                { 
-                    type = (Mahjong.Type)Random.Range(0, 3),
-                    num = Random.Range(0, 9)
-                };
-                cp.SetValue(value);
+            var obj = Instantiate(prefab, new Vector3(Random.Range(-50, 50), 3, Random.Range(-50,50)), Quaternion.identity);
+            var cp = obj.GetComponent<Mahjong>();
+            cp.type = (Mahjong.CombinationType)Random.Range(0, 3);
+            if(cp.type == Mahjong.CombinationType.Single || Mahjong.CombinationType.Pair == cp.type) {
+                cp.category = (Mahjong.Category)Random.Range(0, 4);
+                cp.num = Random.Range(0, 9);
             } else {
-                bool bEqual = Random.Range(0,2) == 1;
-                GameObject obj =  Instantiate(doublePrefab, new Vector3(Random.Range(-50,50), 5, Random.Range(-50,50)), Quaternion.identity);
-                var cp = obj.GetComponent<Double>();
-                var left = new Mahjong.Info
-                { 
-                    type = (Mahjong.Type)Random.Range(0, 3),
-                    num = Random.Range(0, 8)
-                };
-                var right = left;
-                if(!bEqual) {
-                    right.num += 1;
-                }
-                cp.SetValue(left, right);
+                cp.category = (Mahjong.Category)Random.Range(0, 3);
+                cp.num = Random.Range(0, 8);
             }
+            cp.Rebuild();
         }
     }
 }
