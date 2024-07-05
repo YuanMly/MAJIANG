@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!1 &4493107219126096798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 7
+  m_Component:
+  - component: {fileID: 8783538831136543546}
+  - component: {fileID: 8594770833267122716}
+  - component: {fileID: 8701495566880233404}
+  - component: {fileID: 6276783602765447955}
+  m_Layer: 0
+  m_HasEditorInfo: 1
+  m_Name: Mahjong
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8783538831136543546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493107219126096798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.84, y: 6.85, z: -4.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8594770833267122716
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493107219126096798}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8701495566880233404
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493107219126096798}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6276783602765447955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493107219126096798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c6e5bbc8f76d04a893a7fa17474bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  categorys:
+  - category: 0
+    textures:
+    - {fileID: 2800000, guid: ba3014088404cce4d8fe06884db6dcb7, type: 3}
+    - {fileID: 2800000, guid: a107972b32671974baa689dd905a9625, type: 3}
+    - {fileID: 2800000, guid: 7eeecb2dd4cc29b4bbf21222fdc57ed8, type: 3}
+    - {fileID: 2800000, guid: 8936aa93fa61f72468cd2e218326b8ee, type: 3}
+    - {fileID: 2800000, guid: acaa4ad42b39c6f4cb930a56ab5308c0, type: 3}
+    - {fileID: 2800000, guid: a760620810597864c9c911bb7b86f59d, type: 3}
+    - {fileID: 2800000, guid: b521bf2fdeafc644fbdac3f786bb756f, type: 3}
+    - {fileID: 2800000, guid: b40765528c834f641872720139ff174a, type: 3}
+    - {fileID: 2800000, guid: a6a7cf12adb33b042b26cb1352c9d8fe, type: 3}
+  - category: 1
+    textures:
+    - {fileID: 2800000, guid: 88e047dc90d750f469798b30d0935bac, type: 3}
+    - {fileID: 2800000, guid: 932d2269f70bb37468d065b37284737e, type: 3}
+    - {fileID: 2800000, guid: b4ad8e708f58f1e42a3e55d02989c413, type: 3}
+    - {fileID: 2800000, guid: d67eb41c7869f724b9d0fa746064ce7b, type: 3}
+    - {fileID: 2800000, guid: c3441d5fe4d1e104f8aeafbb8e5311dd, type: 3}
+    - {fileID: 2800000, guid: 58cd8c8a884873842977e813057a0894, type: 3}
+    - {fileID: 2800000, guid: 689d1ca853b456f43b461969e75b89de, type: 3}
+    - {fileID: 2800000, guid: 62412f28e979d084f9575f3c06169d57, type: 3}
+    - {fileID: 2800000, guid: 6539f32073ee7d142b6082ca10f869e6, type: 3}
+  - category: 2
+    textures:
+    - {fileID: 2800000, guid: 26c5ed90379d7624ea9b5ba31724c31c, type: 3}
+    - {fileID: 2800000, guid: 676119d2f2fcbe140b6ff4f8aad3cfb9, type: 3}
+    - {fileID: 2800000, guid: 5001d24a33384984b8e4ce1a63c80ffa, type: 3}
+    - {fileID: 2800000, guid: fb466c1fb3e767645962e2ab318d8ede, type: 3}
+    - {fileID: 2800000, guid: 5c1bc77b90282ad44b4b63c2887f5f01, type: 3}
+    - {fileID: 2800000, guid: e0bc972c59f442840b16d9adb5d1ada9, type: 3}
+    - {fileID: 2800000, guid: d4e7fee707990cf4e8cd9366d48162b8, type: 3}
+    - {fileID: 2800000, guid: 6a25c143cc95a73478854b5cd9521160, type: 3}
+    - {fileID: 2800000, guid: c905d337300c7c54898f2282fa7271d8, type: 3}
+  - category: 3
+    textures:
+    - {fileID: 2800000, guid: 296f336c4d091544692e0f83a8f7c942, type: 3}
+    - {fileID: 2800000, guid: 2bb87de09f1b45040bf7bcb6745f3c48, type: 3}
+    - {fileID: 2800000, guid: b84bf3682a708b54abd0b0a11b3a0e59, type: 3}
+    - {fileID: 2800000, guid: c9d9c475321966148b6ca0f32de0e998, type: 3}
+    - {fileID: 2800000, guid: cf341972eb442c240be81b4b1be33e8d, type: 3}
+    - {fileID: 2800000, guid: 7353b90620dec3042a377ef8f7fbb15e, type: 3}
+    - {fileID: 2800000, guid: fb2325ba8f0401743b5b341c85b2b306, type: 3}
+    - {fileID: 2800000, guid: 8d6a6900d68dca6449996664ac3d159d, type: 3}
+    - {fileID: 2800000, guid: acd4b204a9d574848bd6af043655dec1, type: 3}
+  category: 0
+  num: 0
+  type: 0
+  singleModel: {fileID: 2558660371070480632, guid: aa56324b48871dc489763758b1ee6f34, type: 3}
+  doubleModel: {fileID: 1587488457172981884, guid: c420e7b990b0d7947b63baf22695bc53, type: 3}

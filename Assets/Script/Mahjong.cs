@@ -8,18 +8,18 @@ public class Mahjong : MonoBehaviour, IPointerClickHandler{
     public enum Category {Bam, Crak, Dot, Other}
     public enum CombinationType {Single, Pair, Run}
     [System.Serializable]
-    public struct ShaderPrefabs
+    public struct CategroyTexture
     {
         public Category category;
-        public GameObject[] prefabs;
+        public Texture2D[] textures;
     }
-    public ShaderPrefabs[] prefabs;
+    public CategroyTexture[] categorys;
 
-    private GameObject getPrefab(Category category, int num) {
-        foreach(var item in prefabs) {
+    private Texture2D GetTexture(Category category, int num) {
+        foreach(var item in categorys) {
             if(item.category != category) continue;
-            if(num >= item.prefabs.Length) return null;
-            return item.prefabs[num];
+            if(num >= item.textures.Length) return null;
+            return item.textures[num];
         }
         return null;
     }
@@ -28,21 +28,20 @@ public class Mahjong : MonoBehaviour, IPointerClickHandler{
     public int num;
     public CombinationType type;
 
+    [SerializeField] private GameObject singleModel;
+    [SerializeField] private GameObject doubleModel;
+ 
     public void Rebuild() {
-        GameObject prefab = getPrefab(category, num);
-        var size = prefab.GetComponent<Renderer>().bounds.size;
+        GameObject model = Instantiate(CombinationType.Single == type? singleModel : doubleModel, transform);
+        model.transform.localPosition = Vector3.zero;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        if(type == CombinationType.Single) {
-            var obj = Instantiate(prefab, transform);
-            obj.transform.localPosition = Vector3.zero;
-            boxCollider.size = size;
-        } else {
-            var left = Instantiate(prefab, transform);
-            var prefab1 = type == CombinationType.Pair ? prefab : getPrefab(category, num + 1);
-            var right = Instantiate(prefab1, transform);
-            left.transform.localPosition = new Vector3(-size.x / 2, 0, 0);
-            right.transform.localPosition = new Vector3(size.x /2, 0, 0);
-            boxCollider.size = new Vector3(size.x * 2, size.y, size.z);
+        boxCollider.size = model.GetComponent<Renderer>().bounds.size;
+        var cp = model.GetComponent<MeshRenderer>();
+        cp.materials[0].mainTexture = GetTexture(category, num);
+        if(type == CombinationType.Pair) {
+            cp.materials[2].mainTexture = GetTexture(category, num);
+        } else if(type == CombinationType.Run) {
+            cp.materials[2].mainTexture = GetTexture(category, num+1);
         }
     }
 
