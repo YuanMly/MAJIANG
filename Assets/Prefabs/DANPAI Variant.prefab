@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:yousandi.cn,2023:
---- !u!1001 &3405664548719119785
+--- !u!1001 &2173190070639484080
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -14,15 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3abd4cedf9437274cba001620d51f6e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.409101
+      value: 31.315285
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3abd4cedf9437274cba001620d51f6e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000011920929
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3abd4cedf9437274cba001620d51f6e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.85438
+      value: -39.233315
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3abd4cedf9437274cba001620d51f6e5, type: 3}
       propertyPath: m_LocalRotation.w

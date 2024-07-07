@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slugCount: 8
-  model: {fileID: 100000, guid: 425bf8c9c108e254ba60dbbbdc6089eb, type: 3}
+  model: {fileID: 919132149155446097, guid: 3abd4cedf9437274cba001620d51f6e5, type: 3}
   placeCount: 0
 --- !u!1 &963194225
 GameObject:

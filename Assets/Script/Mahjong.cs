@@ -37,11 +37,15 @@ public class Mahjong : MonoBehaviour, IPointerClickHandler{
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         boxCollider.size = model.GetComponent<Renderer>().bounds.size;
         var cp = model.GetComponent<MeshRenderer>();
-        cp.materials[0].mainTexture = GetTexture(category, num);
-        if(type == CombinationType.Pair) {
+        if(type == CombinationType.Single) {
+            cp.materials[0].mainTexture = GetTexture(category, num);
+        }
+        else if(type == CombinationType.Pair) {
+            cp.materials[0].mainTexture = GetTexture(category, num);
             cp.materials[2].mainTexture = GetTexture(category, num);
-        } else if(type == CombinationType.Run) {
-            cp.materials[2].mainTexture = GetTexture(category, num+1);
+        } else {
+            cp.materials[2].mainTexture = GetTexture(category, num);
+            cp.materials[0].mainTexture = GetTexture(category, num+1);
         }
     }
 

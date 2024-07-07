@@ -35,7 +35,6 @@ public class PlacementBar : MonoBehaviour
         var mj = obj.GetComponent<Mahjong>();
         int count = mj.type == Mahjong.CombinationType.Single ? 1 : 2;
         if(count + placeCount > slugCount) return;
-
         mahjongs.Add(obj);
         obj.GetComponent<Rigidbody>().isKinematic = true;
         obj.GetComponent<BoxCollider>().enabled = false;
@@ -43,6 +42,7 @@ public class PlacementBar : MonoBehaviour
         obj.transform.DORotateQuaternion(Quaternion.identity, 0.3f);
 
         float LeftX = (float)((placeCount - 4) * modelSize.x);
+        placeCount += count;
 
         var (removeType, removeObjs) = CheckToRemove();
         if(removeType == RemoveType.Chow || removeType == RemoveType.Pung) {
@@ -55,26 +55,12 @@ public class PlacementBar : MonoBehaviour
                 mahjongs.Remove(item);
             }
         }
-
-        obj.transform.DOLocalMove(new Vector3(LeftX + modelSize.x / 2* count, 0, 0), 0.3f).OnComplete(()=> {
-            if(removeType != RemoveType.None) {
-                foreach(var item in removeObjs) {
-                    Destroy(item);
-                    ResetArrange();
-                }
-            }
+        obj.transform.DOLocalMove(new Vector3(LeftX + modelSize.x /  2 * count, 0, 0), 0.3f).OnComplete(()=> {
+            if(removeType == RemoveType.None) return; 
+            RemoveMahjongs(removeObjs[0], removeObjs[1]);
+            ResetArrange();
+            
         });
-        placeCount += count;
-    }
-
-    int CalculatePlaceCount() {
-        var result = 0;
-        foreach(var item in mahjongs) {
-            var mj = item.GetComponent<Mahjong>();
-            int count = mj.type == Mahjong.CombinationType.Single ? 1 : 2;
-            result += count;
-        }
-        return result;
     }
 
     private (RemoveType, GameObject[]) CheckToRemove() {
@@ -94,6 +80,7 @@ public class PlacementBar : MonoBehaviour
     private void ResetArrange() {
         int total = 0;
         foreach(var item in mahjongs) {
+            if(DOTween.IsTweening(item.transform)) continue;
             var mj = item.GetComponent<Mahjong>();
             int count = mj.type == Mahjong.CombinationType.Single ? 1 : 2;
             float LeftX = (float)((total - 4) * modelSize.x);
@@ -117,5 +104,27 @@ public class PlacementBar : MonoBehaviour
         if(mj2.type == Mahjong.CombinationType.Single && mj1.type == Mahjong.CombinationType.Run && 
           (mj2.num + 1 == mj1.num || mj2.num - 2 == mj1.num)) return RemoveType.Chow;
         return RemoveType.None;
+    }
+
+    private void RemoveMahjongs(GameObject left, GameObject right) {
+        Sequence sequence = DOTween.Sequence();
+        // float width = GetComponent<Renderer>().bounds.size.x;
+        float positionY = 10;
+        sequence.Append(left.transform.DOLocalMove(new Vector3(-30,positionY,0), 0.15f));
+        sequence.Join(right.transform.DOLocalMove(new Vector3(30,positionY,0), 0.15f));
+        sequence.Append(left.transform.DOLocalMove(new Vector3(-GetModelWidth(left)/2 , positionY, 0), 0.2f));
+        sequence.Join(right.transform.DOLocalMove(new Vector3(GetModelWidth(right)/2 , positionY, 0), 0.2f));
+        sequence.AppendInterval(0.3f);
+        sequence.Play().OnComplete(()=>{
+            Destroy(left);
+            Destroy(right);
+        });
+
+    }
+
+    private float GetModelWidth(GameObject obj) {
+         var mj = obj.GetComponent<Mahjong>();
+        int count = mj.type == Mahjong.CombinationType.Single ? 1 : 2;
+        return modelSize.x * count;
     }
 }
