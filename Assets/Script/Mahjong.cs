@@ -44,9 +44,15 @@ public class Mahjong : MonoBehaviour, IPointerClickHandler{
             cp.materials[0].mainTexture = GetTexture(category, num);
             cp.materials[2].mainTexture = GetTexture(category, num);
         } else {
-            cp.materials[2].mainTexture = GetTexture(category, num);
             cp.materials[0].mainTexture = GetTexture(category, num+1);
+            cp.materials[2].mainTexture = GetTexture(category, num);
         }
+        SetPhysics(true);
+    }
+
+    public void SetPhysics(bool enable) {
+        gameObject.GetComponent<Rigidbody>().isKinematic = !enable;
+        gameObject.GetComponent<BoxCollider>().enabled = enable;
     }
 
     public void OnPointerClick(PointerEventData eventData)

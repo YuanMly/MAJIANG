@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
-
+ enum RemoveType { None ,Pung, Chow, Kong }
 public class PlacementBar : MonoBehaviour
 {
-    private enum RemoveType { None ,Pung, Chow, Kong }
-
     [SerializeField] private int slugCount;
     [SerializeField] private GameObject model;
 
     private Vector3 modelSize;
 
-    public int placeCount = 0;
+    private int placeCount = 0;
     private List<GameObject> mahjongs = new();
     private static PlacementBar _instance;
     public static PlacementBar Instance {
@@ -36,8 +34,7 @@ public class PlacementBar : MonoBehaviour
         int count = mj.type == Mahjong.CombinationType.Single ? 1 : 2;
         if(count + placeCount > slugCount) return;
         mahjongs.Add(obj);
-        obj.GetComponent<Rigidbody>().isKinematic = true;
-        obj.GetComponent<BoxCollider>().enabled = false;
+        mj.SetPhysics(false);
         obj.transform.parent = transform;
         obj.transform.DORotateQuaternion(Quaternion.identity, 0.3f);
 
