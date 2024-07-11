@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MahjongUtils;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,62 +26,41 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GenerateMahjongForLevel());
     }
 
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Q)) {
+
+        } else if(Input.GetKeyDown(KeyCode.W)) {
+            
+        } else if(Input.GetKeyDown(KeyCode.E)) {
+            
+        } else if(Input.GetKeyDown(KeyCode.R)) {
+            
+        } 
+    }
+
     IEnumerator GenerateMahjongForLevel() {
         yield return new WaitForSeconds(0.3f);
-        for(int i = 0; i < mahjongCount; i += 2){ 
-            mahjongs.AddLast(GeneratePairMahjongs());
+        for(int i = 0; i < mahjongCount; i += 2){
+            GameObject obj1 = Instantiate(prefab);
+            GameObject obj2 = Instantiate(prefab);
+            Utils.SetRandomMatchedPair(obj1, obj2);
+            mahjongs.AddLast((obj1, obj2));
         }
 
-        List<GameObject> list = ShuffleMahjongs();
+        List<GameObject> list = GetRandomMahjongList();
+
         foreach(var obj in list) {
             obj.transform.position = new Vector3(Random.Range(-30,30), 3, Random.Range(-50,80));
             obj.transform.rotation = Quaternion.identity;
             var cp = obj.GetComponent<Mahjong>();
             cp.Rebuild();
+            cp.SetPhysics(true);
             yield return new WaitForSeconds(0.04f);
         }
-        
     }
 
-    private (GameObject, GameObject) GeneratePairMahjongs() {
-        var one = Instantiate(prefab);
-        var oneCp = one.GetComponent<Mahjong>();
-        var another = Instantiate(prefab);
-        var anotherCp = another.GetComponent<Mahjong>();
-        var generateType = (RemoveType) Random.Range(1, 4); 
-        if(generateType == RemoveType.Pung) {
-            var category = (Mahjong.Category)Random.Range(0, 4);
-            var num = Random.Range(0, 9);
-            oneCp.category = category;
-            anotherCp.category = category;
-            oneCp.type = Mahjong.CombinationType.Single;
-            anotherCp.type = Mahjong.CombinationType.Pair;
-            oneCp.num = num;
-            anotherCp.num = num;
-        } else if(generateType == RemoveType.Kong){
-            var category = (Mahjong.Category)Random.Range(0, 4);
-            var num = Random.Range(0, 9);
-            oneCp.category = category;
-            anotherCp.category = category;
-            oneCp.type = Mahjong.CombinationType.Pair;
-            anotherCp.type = Mahjong.CombinationType.Pair;
-            oneCp.num = num;
-            anotherCp.num = num;
-        } else {
-            var category = (Mahjong.Category)Random.Range(0, 3);
-            var num = Random.Range(0, 7);
-            oneCp.category = category;
-            anotherCp.category = category;
-            oneCp.type = Mahjong.CombinationType.Single;
-            anotherCp.type = Mahjong.CombinationType.Run;
-            oneCp.num = num;
-            anotherCp.num = num+1;
-        }
-        return (one, another);
-    }
-
-    List<GameObject> ShuffleMahjongs() {
-         List<GameObject> result = new();
+    private List<GameObject> GetRandomMahjongList() {
+        List<GameObject> result = new();
         foreach(var (o1, o2) in mahjongs) {
             result.Add(o1);
             result.Add(o2);
@@ -92,4 +72,37 @@ public class GameManager : MonoBehaviour
         }
         return result;
     }
+
+    public void RemoveAndRematch(GameObject m1, GameObject m2) {
+        for(var node = mahjongs.First; node != null; node  = node.Next) {
+            var (t1, t2) = node.Value;
+            var tmpNode = node;
+            if((m1 == t1 && m2 == t2) || (m2 == t1 && m1 == t2)) {
+                mahjongs.Remove(tmpNode);
+                return;
+            }
+        }
+
+        var (node1, one) = FindPartnerFromLinkedList(m1);
+        var (node2, another) = FindPartnerFromLinkedList(m2);
+        mahjongs.Remove(node1);
+        mahjongs.Remove(node2);
+        mahjongs.AddLast((one, another));
+
+        if(Utils.GetMatchType(one, another) == Match.None) {  
+            Utils.Rematch(one, another);
+            one.GetComponent<Mahjong>().Rebuild();
+            another.GetComponent<Mahjong>().Rebuild();
+        }
+    }
+
+    public (LinkedListNode<(GameObject, GameObject)>, GameObject) FindPartnerFromLinkedList(GameObject obj){
+        for(var node = mahjongs.First; node != null; node  = node.Next) {
+            var (t1, t2) = node.Value;
+            if(obj == t1) return (node, t2);
+            if(obj == t2) return (node, t1);
+        }
+        throw new System.ArgumentNullException();
+    }
+
 }
